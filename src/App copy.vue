@@ -1,27 +1,33 @@
 <template>
-  <div> 
-    <div>
-      <Banner></Banner>
-    </div>
-    <div>
+  <div>
+    <el-container>
+      <el-header>
+        <Banner></Banner>
+      </el-header>
       <el-container>
-        <Left></Left>
-        <Context></Context>
+        <el-aside width="200px"><Left></Left></el-aside>
+        <el-container>
+          <el-main>
+            <router-link active-class="list-group-item active" to="./context">Go to Home</router-link>
+            <router-link active-class="list-group-item active" to="./about">Go to About</router-link>
+            <router-view></router-view>
+          </el-main>
+          <el-footer>
+            <Footer></Footer>
+          </el-footer>
+        </el-container>
       </el-container>
-    </div>
-    <div>
-      <el-footer>this is footer</el-footer>
-    </div>
+    </el-container>
   </div>
 </template>
 <script>
-import Banner from './pages/banner'
-import Left from './pages/left'
-import Context from './pages/context'
+import Left from './pages/left.vue'
+import Banner from './pages/banner.vue'
+import Footer from './pages/footer.vue'
 export default {
   name: 'App',
   components: {
-    Banner,Left,Context
+    Left,Banner,Footer
   }
 }
 </script>
