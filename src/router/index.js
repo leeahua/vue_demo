@@ -1,15 +1,22 @@
-import Context from '../pages/context.vue'
 import About from '../pages/about.vue'
-import Main from '../pages/main.vue'
+import User from '../pages/user/user.vue'
+import Login from "../pages/project/login.vue";
+import Register from "../pages/project/register.vue";
+import Dashboard from '../pages/project/dashboard.vue'
+import Message from '../pages/project/message.vue'
+import Newsfeeds from '../pages/project/newsfeeds.vue'
+import Notifications from '../pages/project/notifications.vue'
+import Privacy from '../pages/project/privacy.vue'
+import Request from '../pages/project/request.vue'
+import Settings from '../pages/project/settings.vue'
+import Chat from '../pages/project/chat.vue'
 import Router from "vue-router";
-// 这块就是配置我们的路由信息了，一个是首页 home，一个是关于页面 about
-// 其中 name: 'Home' 是我们的别名， path: '/',是我们的路由路径，component是我们路由对应的组件。
 
 const routes = [
   {
-    name: 'Context',
-    path: '/context',
-    component: Context
+    name: 'Dashboard',
+    path: '/',
+    component: Dashboard
   },
   {
     name: 'About',
@@ -17,10 +24,56 @@ const routes = [
     component: About
   },
   {
-    name: 'main',
-    path: '/',
-    component: Main
+    name: 'User',
+    path: '/user',
+    component: User
+  },
+  {
+    name: 'Login',
+    path: '/login',
+    component: Login
+  },
+  {
+    name: 'Register',
+    path: '/register',
+    component: Register
+  },
+  {
+    name: 'Message',
+    path: '/message',
+    component: Message
+  },
+  {
+    name: 'Newsfeeds',
+    path: '/newsfeeds',
+    component: Newsfeeds
+  },
+  {
+    name: 'Notifications',
+    path: '/notifications',
+    component: Notifications
+  },
+  {
+    name: 'Privacy',
+    path: '/privacy',
+    component: Privacy
+  },
+  {
+    name: 'Request',
+    path: '/request',
+    component: Request
+  },
+  {
+    name: 'Settings',
+    path: '/settings',
+    component: Settings
+  },
+  {
+    name: 'Chat',
+    path: '/chat',
+    component: Chat
   }
+
 ]
 
 
@@ -28,5 +81,23 @@ const routes = [
 const router = new Router({
   routes
 })
+// 导航守卫
+// 使用 router.beforeEach 注册一个全局前置守卫
+router.beforeEach((to, from, next) => {
+  console.log('jere')
+  console.log(to.path)
+  if (to.path === '/login') {
+    next();
+  } else {
+    let token = localStorage.getItem('Authorization');
+    console.log(token)
+    if (token === null || token === '') {
+      next('/login');
+    } else {
+      console.log('to-->path', to.path)
+      next();
+    }
+  }
+});
 
 export default router

@@ -1,29 +1,13 @@
 <template>
-  <el-header>
-    <el-menu
+  <el-menu
       :default-active="activeIndex"
       class="el-menu-demo"
       mode="horizontal"
       @select="handleSelect"
-    >
-      <el-menu-item index="1">处理中心</el-menu-item>
-      <!-- <el-submenu index="2">
-        <template slot="title">我的工作台</template>
-        <el-menu-item index="2-1">选项1</el-menu-item>
-        <el-menu-item index="2-2">选项2</el-menu-item>
-        <el-menu-item index="2-3">选项3</el-menu-item>
-        <el-submenu index="2-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="2-4-1">选项1</el-menu-item>
-          <el-menu-item index="2-4-2">选项2</el-menu-item>
-          <el-menu-item index="2-4-3">选项3</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-menu-item index="3" disabled>消息中心</el-menu-item>
-      <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
-    </el-menu> -->
+    > <template v-for="item in menus">
+        <el-menu-item :index="item.id" :key="item.id">{{item.name}}</el-menu-item>
+      </template>
     </el-menu>
-  </el-header>
 </template>
 
 <script>
@@ -34,25 +18,58 @@ export default {
       name: "test",
       msg:'',
       id:'',
-      activeIndex: '1'
+      activeIndex: '1',
+      menus: [
+        {
+          id: '1',
+          name: '处理中心',
+          path: '/about',
+        },
+        {
+          id: '2',
+          name: '主页',
+          path: '/main',
+        },
+        {
+          id: '3',
+          name: '登录',
+          path: '/login',
+        },
+        {
+          id: '4',
+          name: '注册',
+          path: '/register',
+        },
+      ]
     }
   },
+  mounted:function() {
+    this.$nextTick(function () {
+      console.log('1111')
+      this.init()
+    })
+  },
   methods:{
-    go () {
-      console.log('gogogo')
-      this.$router.push({
-        name: 'About',
-        params: {name: "processcenter", id:"1234"},
-        // 保留现有的查询和 hash 值，如果有的话
-        // query: this.$route.query,
-        // hash: this.$route.hash,
-      })
+    init() {
+      // 获取菜单信息
+      this.$http.get('http://localhost:8080/api/demo/name', {params:{name:'1234'}} ).then(function(response){
+        console.log(response)
+        this.data = response.body
+      }, function(response){
+        this.$message('数据加载失败',response)
+        console.log(response)
+      });
     },
     handleSelect(data) {
       console.log(data)
-      if(data === '1'){
-          console.log(111)
-          this.go()
+      for(let menu of this.menus){
+        if(menu.id === data){
+          this.$router.push({
+            path: menu.path,
+            query: {name:menu.name}
+          })
+          return
+        }
       }
     }
   }

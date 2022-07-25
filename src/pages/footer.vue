@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>这里是{{name}}</h1>
+    <h1>copy by 2022.07.18</h1>
   </div>
 </template>
 

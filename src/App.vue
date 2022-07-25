@@ -1,71 +1,32 @@
 <template>
-  <div> 
-    <div>
-      <Banner></Banner>
+  <div>
+    <Nav></Nav>
+    <div class="main">
+      <router-view></router-view>
     </div>
-    <div>
-      <el-container>
-        <Left></Left>
-        <Context></Context>
-      </el-container>
-    </div>
-    <div>
-      <el-footer>this is footer</el-footer>
+    <div class="col-sm-12">
+      &copy; Dostibook 2018.
     </div>
   </div>
 </template>
 <script>
-import Banner from './pages/banner'
-import Left from './pages/left'
-import Context from './pages/context'
+// import Banner from './pages/banner'
+import './assets/css/style.css'
+import './assets/css/admin.css'
+import Nav from './pages/project/nav.vue'
 export default {
   name: 'App',
   components: {
-    Banner,Left,Context
+    Nav
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 20px;
-}
-.el-header, .el-footer {
-  background-color: #B3C0D1;
-  color: #333;
-  text-align: center;
-  line-height: 60px;
-}
-
-.el-aside {
-  background-color: #D3DCE6;
-  color: #333;
-  text-align: center;
-  line-height: 200px;
-}
-
-.el-main {
-  background-color: #E9EEF3;
-  color: #333;
-  text-align: center;
-  line-height: 160px;
-}
-
-body > .el-container {
-  margin-bottom: 40px;
-}
-
-.el-container:nth-child(5) .el-aside,
-.el-container:nth-child(6) .el-aside {
-  line-height: 260px;
-}
-
-.el-container:nth-child(7) .el-aside {
-  line-height: 320px;
-}
+  .signup-form {
+    background: rgba(255, 255, 255, 1);
+    padding: 10px 20px;
+    border-radius: 2px;
+    box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.4);
+  }
 </style>
