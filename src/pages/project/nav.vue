@@ -4,7 +4,7 @@
         <div class="row">
           <div class="col-sm-4">
             <div class="logo">
-              <h1>DostiBook</h1>
+              <h1>站点名称</h1>
             </div>
           </div>
           <div class="col-sm-8">
@@ -34,7 +34,6 @@
 <script>
 export default {
   name: 'Nav'
-
 }
 </script>
 

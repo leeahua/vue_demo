@@ -8,12 +8,11 @@ import './assets/css/style.css'
 import VueResource from 'vue-resource'
 import store from './store/index'
 import LemonIMUI from 'lemon-imui';
-import 'lemon-imui/dist/index.css';
-Vue.use(LemonIMUI);
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(Router)
 Vue.use(VueResource)
+Vue.use(LemonIMUI);
 let vm = new Vue({
   store,
   router,
